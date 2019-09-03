@@ -18,12 +18,12 @@ where gender = 'F') as woman;
 
 -- 4번문제
 -- 현재 근무하고 있는 직원 수는 몇 명입니까? (salaries 테이블을 사용합니다.)
---- Oracle에서는 가능한데 이건 안된다!!!
---- select  count(emp_no)  from (select distinct emp_no from salaries);
-select count(distinct emp_no) from salaries; -- 정답
+-- Oracle에서는 가능한데 이건 안된다!!! select  count(emp_no)  from (select distinct emp_no from salaries)
+-- 이걸 해결하기 위해서 | select  count(emp_no)  from (select distinct emp_no from salaries) as a; | <- 이렇게 해주니 해결되었다.
 
-select * from salaries;
-select count(*) from employees;
+select  count(emp_no)  from (select distinct emp_no from salaries) as a;
+
+select count(distinct emp_no) from salaries;
 
 -- 5번문제
 -- 부서는 총 몇 개가 있나요?
@@ -35,8 +35,6 @@ select * from dept_manager;
 
 -- 추가 각 부서별 매니저는 몇명인지 구하라
 select count(dept_no) from dept_manager;
-select dept_no from dept_manager
-group by emp_no having count(emp_no);
 
 -- 7번문제
 -- 전체 부서를 출력하려고 합니다. 순서는 부서이름이 긴 순서대로 출력해 보세요.
@@ -56,7 +54,7 @@ order by ti desc;
 select char_length(ti), title from 
 (select distinct(title) as 'ti' from titles)
 order by ti desc;
-
+-- 
 
 -- 10번
 -- 현재 Enginner 직책의 사원은 총 몇 명입니까?
