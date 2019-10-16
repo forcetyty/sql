@@ -288,6 +288,15 @@ select *, (select now()) from employees;
 -- 방법2 : from절에 subquery 이용!!!
 
 
+select emp_no, first_name, last_name, gender, date_format(hire_date, '%Y년 %m월 %d일') from employees
+where first_name Like '%as%'
+and last_name like '%as%'
+order by hire_date;
+
+
+
+
+
     
 
 
